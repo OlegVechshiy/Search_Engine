@@ -25,7 +25,7 @@ vector<string> ConverterJSON::getRequests()
     fileOpen.open("requests.json");
 
     if(!fileOpen)
-        cerr << "File requests.json not found \n";
+        cerr << "File requests.json not found\n";
     else
     {
         try
@@ -59,18 +59,18 @@ void ConverterJSON::putAnswers(vector<vector<pair<int, float>>> answers)
 
             for(int i = 0; i < answers.size(); i++)
             {
-                jsonWork["Answers:"]["request" + to_string(i) + ":"];
+                jsonWork["Answers:"]["request" + to_string(i + 1) + ":"];
 
                 if(answers[i].empty())
                 {
-                    jsonWork["Answers:"]["request" + to_string(i) + ":"] = {{"result:", "false"}};
+                    jsonWork["Answers:"]["request" + to_string(i + 1) + ":"] = {{"result:", "false"}};
                     continue;
                 }
                 else
-                    jsonWork["Answers:"]["request" + to_string(i) + ":"] = {{"result:", "true"}};
+                    jsonWork["Answers:"]["request" + to_string(i + 1) + ":"] = {{"result:", "true"}};
 
                 for(int j = 0; j < answers[i].size(); j++)
-                    jsonWork["Answers:"]["request" + to_string(i) + ":"]["relevance:"].push_back({{"docid:", answers[i][j].first}, {"rank:", ceil(answers[i][j].second * 1000) / 1000}});
+                    jsonWork["Answers:"]["request" + to_string(i + 1) + ":"]["relevance:"].push_back({{"docid:", answers[i][j].first}, {"rank:", ceil(answers[i][j].second * 1000) / 1000}});
             }
 
             fileOpen << jsonWork;
@@ -113,5 +113,5 @@ void ConverterJSON::runFileConfigJSON()
     if(jsonWork["config"].count("max_responses"))
         maxResponses = jsonWork["config"]["max_responses"];
 
-    cout << jsonWork["config"]["name"] <<" Starting. Version "<< jsonWork["config"]["version"] << endl;
+    cout << "Application: " << jsonWork["config"]["name"] << "\n" <<"Version: "<< jsonWork["config"]["version"] << "\n" << "Max responses: " << jsonWork["config"]["max_responses"] << endl;
 }

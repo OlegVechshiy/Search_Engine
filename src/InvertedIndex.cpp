@@ -54,7 +54,7 @@ void InvertedIndex::getRowDoc(string rowDoc, int i)
 
         if(!freqDictionary.count(word))
         {
-            entry.doc_id = i;
+            entry.docId = i;
             entry.count = 1;
             vectorEntry.push_back(entry);
 
@@ -66,7 +66,7 @@ void InvertedIndex::getRowDoc(string rowDoc, int i)
             bool found = false;
             for(auto & j : it->second)
             {
-                if(j.doc_id == i)
+                if(j.docId == i)
                 {
                     j.count++;
                     found = true;
@@ -76,7 +76,7 @@ void InvertedIndex::getRowDoc(string rowDoc, int i)
 
             if(!found)
             {
-                entry.doc_id = i;
+                entry.docId = i;
                 entry.count = 1;
                 it->second.push_back(entry);
             }

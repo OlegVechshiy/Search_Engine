@@ -9,11 +9,11 @@ using namespace std;
 //Структура относительного индекса
 struct RelativeIndex
 {
-    size_t doc_id;
+    size_t docId;
     float rank;
     bool operator == (const RelativeIndex& other) const
     {
-        return (doc_id == other.doc_id && rank == other.rank);
+        return (docId == other.docId && rank == other.rank);
     }
 };
 

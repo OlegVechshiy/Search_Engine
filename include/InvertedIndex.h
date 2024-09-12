@@ -15,8 +15,8 @@ using namespace std;
 //Структура инвертированного индекса
 struct Entry
 {
-    size_t doc_id, count;
-    bool operator == (const Entry& other) const {return (doc_id == other.doc_id && count == other.count);}
+    size_t docId, count;
+    bool operator == (const Entry& other) const {return (docId == other.docId && count == other.count);}
 };
 
 //Класс индексации документов

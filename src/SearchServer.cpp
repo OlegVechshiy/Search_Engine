@@ -68,7 +68,7 @@ void SearchServer::handleRequest(const string& request, int i, int responsesLimi
             continue;
 
         for(int k = 0; k < index.getWordCount(itCountWords.second).size(); k++)
-            listNumberDocId.insert(index.getWordCount(itCountWords.second)[k].doc_id);
+            listNumberDocId.insert(index.getWordCount(itCountWords.second)[k].docId);
     }
 
     lock_guard<mutex> guard(updateDate);
@@ -81,12 +81,12 @@ void SearchServer::handleRequest(const string& request, int i, int responsesLimi
         for(itThree = listNumberDocId.begin(); itThree != listNumberDocId.end(); itThree++)
         {
             relativeIndex.rank = 0;
-            relativeIndex.doc_id = *itThree;
+            relativeIndex.docId = *itThree;
             for(const auto &itCountWords : countWords)
             {
                 for(int k = 0; k < index.getWordCount(itCountWords.second).size(); k++)
                 {
-                    if(index.getWordCount(itCountWords.second)[k].doc_id == relativeIndex.doc_id)
+                    if(index.getWordCount(itCountWords.second)[k].docId == relativeIndex.docId)
                         relativeIndex.rank += (float)index.getWordCount(itCountWords.second)[k].count;
                 }
             }
